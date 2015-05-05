@@ -1,0 +1,15 @@
+{
+    "architecture": "@CLICK_ARCH@",
+    "description": "Overview of ABC News headlines",
+    "framework": "ubuntu-sdk-14.10",
+    "hooks": {
+        "abc-news": {
+            "apparmor": "abc-news.apparmor",
+            "scope": "abc-news"
+        }
+    },
+    "maintainer": "Jeremy Goldstein <jeremy.goldstein@gmail.com>",
+    "name": "abcnews.jg10",
+    "title": "abcnews",
+    "version": "0.1"
+}
