@@ -8,6 +8,7 @@
 #include <unity/scopes/CategoryRenderer.h>
 #include <unity/scopes/QueryBase.h>
 #include <unity/scopes/SearchReply.h>
+#include <unity/scopes/Department.h>
 
 #include <iomanip>
 #include <sstream>
@@ -58,56 +59,31 @@ void Query::cancelled() {
 
 
 void Query::run(sc::SearchReplyProxy const& reply) {
-    cerr << "About to run initscope" << endl;
-    initScope();
 
     try {
+
+        // Create the root department - top stories
+        sc::Department::SPtr top_stories = sc::Department::create("", query(), "Top Stories");
+
+        // Create the rest of the news categories departments
+        sc::Department::SPtr just_in = sc::Department::create("51120", query(), "Just In");
+        sc::Department::SPtr world = sc::Department::create("52278", query(), "World");
+        sc::Department::SPtr australia = sc::Department::create("46182", query(), "Australia");
+        sc::Department::SPtr business = sc::Department::create("51892", query(), "Business");
+        sc::Department::SPtr entertainment = sc::Department::create("46800", query(), "Entertainment");
+        sc::Department::SPtr sport = sc::Department::create("45924", query(), "Sport");
+        sc::Department::SPtr the_drum = sc::Department::create("1054578", query(), "The Drum");
+
+        top_stories->set_subdepartments({just_in, world, australia, business, entertainment, sport, the_drum});
+
+        reply->register_departments(top_stories);
+
         // Start by getting information about the query
         const sc::CannedQuery &query(sc::SearchQueryBase::query());
 
         // Trim the query string of whitespace
         string query_string = alg::trim_copy(query.query_string());
 
-        // Get the correct URI part for the chosen category
-        std:string catnum, catname;
-
-        switch (category) {
-            case 0:
-                catnum = "45910";
-                catname = "Top Stories";
-                break;
-            case 1:
-                catnum = "51120";
-                catname = "Just In";
-                break;
-            case 2:
-                catnum = "52278";
-                catname = "World";
-                break;
-            case 3:
-                catnum = "46182";
-                catname = "Australia";
-                break;
-            case 4:
-                catnum = "51892";
-                catname = "Business";
-                break;
-            case 5:
-                catnum = "46800";
-                catname = "Entertainment";
-                break;
-            case 6:
-                catnum = "45924";
-                catname = "Sport";
-                break;
-            case 7:
-                catnum = "1054578";
-                catname = "The Drum";
-                break;
-            default:
-                catnum = "45910";
-                catname = "Top Stories";
-        }
 
         // the Client is the helper class that provides the results
         // without mixing APIs and scopes code.
@@ -115,16 +91,18 @@ void Query::run(sc::SearchReplyProxy const& reply) {
         // in the client.
         Client::NewsItemRes newslist;
 
-        if (query_string.empty()) {
-            // If the string is empty, get the unfiltered top stories
-            newslist = client_.newsItems("*", catnum);
+        //cerr << query.department_id() << endl;
+
+        if (!query.department_id().empty()) {
+            // If a department is selected, get the news stories for its category
+            newslist = client_.newsItems("*", query.department_id());
         } else {
-            // otherwise, get the top stories for the search string
-            newslist = client_.newsItems(query_string, catnum);
+            // otherwise, get the top stories
+            newslist = client_.newsItems("*", "45910");
         }
 
         // Register a category for the top stories
-        auto news_cat = reply->register_category("NewsItems", catname, "",
+        auto news_cat = reply->register_category("NewsItems", "", "",
                                                      sc::CategoryRenderer(NEWS_TEMPLATE));
         for (const auto &newsitem : newslist.newsItems) {
 
@@ -157,17 +135,3 @@ void Query::run(sc::SearchReplyProxy const& reply) {
         reply->error(current_exception());
     }
 }
-
-void Query::initScope()
-{
-    cerr << "run settings()" << endl;
-    unity::scopes::VariantMap config = settings();  // The settings method is provided by the base class
-    cerr << "after settings()" << endl;
-    if (config.empty())
-        cerr << "CONFIG EMPTY!" << endl;
-
-    category = config["category"].get_int();
-    cerr << "category: " << category << endl;
-
-}
-

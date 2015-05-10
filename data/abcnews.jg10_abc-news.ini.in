@@ -1,6 +1,6 @@
 [ScopeConfig]
-DisplayName=ABCNews Scope
-Description=Scope to display Australian ABC News headlines
+_DisplayName=ABCNews Scope
+_Description=Scope to display Australian ABC News headlines
 Art=screenshot.png
 Author=Jeremy Goldstein
 Icon=icon.png

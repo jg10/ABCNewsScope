@@ -8,16 +8,10 @@ intltool_merge_translations(
   UTF8
 )
 
-configure_file(
-  "${CMAKE_SOURCE_DIR}/data/${SCOPE_NAME}-settings.ini"
-  "${CMAKE_BINARY_DIR}/src/${SCOPE_NAME}-settings.ini"
-)
-
 # Install the scope ini file
 install(
   FILES
     "${CMAKE_CURRENT_BINARY_DIR}/${SCOPE_NAME}.ini"
-    "${CMAKE_CURRENT_BINARY_DIR}/${SCOPE_NAME}-settings.ini"
   DESTINATION ${SCOPE_INSTALL_DIR}
 )
 
