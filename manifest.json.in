@@ -8,8 +8,8 @@
             "scope": "abc-news"
         }
     },
-    "maintainer": "Jeremy Goldstein <jeremy.goldstein@gmail.com>",
-    "name": "abcnews.jg10",
-    "title": "abcnews",
+    "maintainer": "Jeremy Goldstein <jg-dev@live.com>",
+    "name": "jeremy-goldstein",
+    "title": "ABCNews Scope",
     "version": "0.1"
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-10 21:11+0200\n"
+"POT-Creation-Date: 2015-05-10 22:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,10 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../data/abcnews.jg10_abc-news.ini.in.h:1
+#: ../data/jeremy-goldstein_abc-news.ini.in.h:1
 msgid "ABCNews Scope"
 msgstr ""
 
-#: ../data/abcnews.jg10_abc-news.ini.in.h:2
+#: ../data/jeremy-goldstein_abc-news.ini.in.h:2
 msgid "Scope to display Australian ABC News headlines"
 msgstr ""

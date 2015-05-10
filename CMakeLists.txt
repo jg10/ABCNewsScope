@@ -51,13 +51,13 @@ include_directories(
 
 # Do not remove this line, its required for the correct functionality of the Ubuntu-SDK
 set(UBUNTU_MANIFEST_PATH "manifest.json.in" CACHE INTERNAL "Tells QtCreator location and name of the manifest file")
-set(UBUNTU_PROJECT_TYPE "Scope" CACHE INTERNAL "Tells QtCreator this is a Scope project")
+set(UBUNTU_PROJECT_TYPE "Scope" CACHE INTERNAL "Tells QtCreator this is a Scope proje2ct")
 
 # Important project paths
 set(CMAKE_INSTALL_PREFIX /)
 set(SCOPE_INSTALL_DIR "/abc-news")
 set(GETTEXT_PACKAGE "abcnews")
-set(PACKAGE_NAME "abcnews.jg10")
+set(PACKAGE_NAME "jeremy-goldstein")
 set(SCOPE_NAME "${PACKAGE_NAME}_abc-news")
 
 # If we need to refer to the scope's name or package in code, these definitions will help
